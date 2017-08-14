@@ -1,7 +1,10 @@
+if("shiny" %in% rownames(installed.packages()) == FALSE) {install.packages("shiny")}
+if("plotrix" %in% rownames(installed.packages()) == FALSE) {install.packages("plotrix")}
+if("rvest" %in% rownames(installed.packages()) == FALSE) {install.packages("rvest")}
 library(shiny)
 library(plotrix)
 library(rvest)
-
+#shiny::runGitHub("colormixer", "dusty-turner")
 
 # Define UI for application that draws a histogram
 colorurl = "https://www.w3schools.com/colors/colors_names.asp"
