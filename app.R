@@ -35,8 +35,8 @@ ui <- fluidPage(
                      scrapecolordf[,1])
       ),
       column(8,
-         verbatimTextOutput("cs"), verbatimTextOutput("cs2"),
-         verbatimTextOutput("mix"),
+         # verbatimTextOutput("cs"), verbatimTextOutput("cs2"),
+         # verbatimTextOutput("mix"),
          plotOutput("mixedplot"), plotOutput("plot1"), plotOutput("plot2")
       ),
       column(2,
