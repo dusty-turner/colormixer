@@ -25,25 +25,26 @@ my_max =2
 ui <- fluidPage(
 
    # Application title
-   titlePanel("Color Mixer"),
+   titlePanel(h1("Color Mixer", align = "center"), windowTitle = "Color Mixer by Dusty Turner"),
 
    # Sidebar with a slider input for number of bins
     fluidRow(
-      column(2,
+      column(3,wellPanel(id = "tPanel",style = "overflow-y:scroll; max-height: 600px",
              radioButtons("colorselect",
-                     "Select A Color",
+                     "Select Color 1",
                      scrapecolordf[,1])
+      )),
+      column(6, align = "center",
+          # verbatimTextOutput("cs"), verbatimTextOutput("cs2"),
+          # verbatimTextOutput("mix"),
+         plotOutput("mixedplot", height = 300, width = 425), 
+         plotOutput("plot1", height = 300, width = 425)
       ),
-      column(8,
-         # verbatimTextOutput("cs"), verbatimTextOutput("cs2"),
-         # verbatimTextOutput("mix"),
-         plotOutput("mixedplot"), plotOutput("plot1"), plotOutput("plot2")
-      ),
-      column(2,
+      column(3,wellPanel(id = "tPanel",style = "overflow-y:scroll; max-height: 600px",
                radioButtons("colorselect2",
-                                  "Select A Color",
+                                  "Select Color 2",
                                   scrapecolordf[,1])
-      )
+      ))
    )
 )
 
@@ -93,11 +94,13 @@ server <- function(input, output, session) {
    })
 
       output$mixedplot = renderPlot({
-        plot(c(0, 100), c(0, 100), type= "n", xlab = "", ylab = "", main = "Mixed Colors")
-        rect(0, 0, 100, 100, col = newEntry())
+        plot(c(0, 100), c(0, 100), type= "n", xlab = "", ylab = "", main = "Mixed Colors",axes=FALSE, frame.plot=FALSE)
+        # rect(0, 0, 100, 100, col = as.character(substring(newEntry(),2)))  ## attempt at online publishing
+        rect(0, 0, 100, 100, col = newEntry())  
+      # }, width = 400, height = 150)
       })
       output$plot1 = renderPlot({
-        plot(c(0, 200), c(0, 200), type= "n", xlab = "", ylab = "", main = "Color 1 and Color 2")
+        plot(c(0, 200), c(0, 200), type= "n", xlab = "", ylab = "", main = "Color 1 and Color 2",axes=FALSE, frame.plot=FALSE)
         rect(0, 0, 100, 200, col = first())
         rect(100, 0, 200, 200, col = second())
       })
